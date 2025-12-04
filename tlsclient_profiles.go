@@ -1,3 +1,5 @@
+//go:build !no_tlsclient
+
 package browser_impersonate
 
 import (

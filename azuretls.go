@@ -1,3 +1,5 @@
+//go:build !no_azuretls
+
 package browser_impersonate
 
 import (
