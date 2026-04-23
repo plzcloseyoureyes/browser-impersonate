@@ -7,6 +7,7 @@ import (
 
 	fhttp "github.com/bogdanfinn/fhttp"
 	tls_client "github.com/bogdanfinn/tls-client"
+	"github.com/bogdanfinn/tls-client/profiles"
 )
 
 // NewImpersonateTLShttpClient is a tls_client.NewHttpClient wrapper, with the option to set emulated device and browser
@@ -43,10 +44,16 @@ func NewImpersonateTLShttpClient(impersonateOption ImpersonateOption, logger tls
 		if impersonateOption.Browser.Type == BrowserChrome && impersonateOption.OS == IOS {
 			newOptions = append(newOptions, tls_client.WithClientProfile(Chrome142_IOS_26))
 		} else {
-			newOptions = append(newOptions, tls_client.WithClientProfile(Chrome141_ClientProfile))
+			if impersonateOption.Browser.Type == BrowserBrave {
+
+				newOptions = append(newOptions, tls_client.WithClientProfile(Brave_146))
+			} else {
+
+				newOptions = append(newOptions, tls_client.WithClientProfile(profiles.Chrome_146))
+			}
 		}
 	case BrowserFirefox:
-		newOptions = append(newOptions, tls_client.WithClientProfile(FirefoxClientProfile))
+		newOptions = append(newOptions, tls_client.WithClientProfile(profiles.Firefox_147))
 	}
 	// newOptions = append(newOptions, tls_client.WithDefaultHeaders(fhttp.Header{}))
 	finalOpts := append(newOptions, options...)

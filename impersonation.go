@@ -58,8 +58,8 @@ type ImpersonateBrowser struct {
 
 type ImpersonateOption struct {
 	OS                ImpersonateOS
-	OverwriteHeaders  map[string]string
 	Browser           ImpersonateBrowser
+	OverwriteHeaders  map[string]string
 	SkipHeaders       bool
 	SkipHTTP2Settings bool
 	SkipPHeaderOrder  bool
@@ -93,7 +93,7 @@ func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, is
 	switch impersonateOption.Browser.Type {
 	case BrowserSafari:
 		hSet("Priority", "u=0, i")
-		hSet("User-Agent", GetSafariUserAgent(impersonateOption.OS))
+		hSet("User-Agent", GetLatestSafariUserAgent(impersonateOption.OS))
 		hSet("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
 		if isSecureContext {
 			// Accept-Encoding is same on IOS and MacOS
@@ -112,7 +112,7 @@ func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, is
 		}
 
 		if impersonateOption.Browser.Version == 0 {
-			impersonateOption.Browser.Version = 142
+			impersonateOption.Browser.Version = 147
 		}
 
 		if impersonateOption.OS == IOS {
@@ -139,7 +139,7 @@ func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, is
 		case Android:
 			userAgentHeader = fmt.Sprintf("Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%d.0.0.0 Mobile Safari/537.36", impersonateOption.Browser.Version)
 		case IOS:
-			userAgentHeader = "Mozilla/5.0 (iPhone; CPU iPhone OS 26_1_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/142.0.7444.46 Mobile/15E148 Safari/604.1"
+			userAgentHeader = "Mozilla/5.0 (iPhone; CPU iPhone OS 26_1_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/147.0.7444.46 Mobile/15E148 Safari/604.1"
 		case Windows:
 			userAgentHeader = fmt.Sprintf("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%d.0.0.0 Safari/537.36", impersonateOption.Browser.Version)
 		case MacOS:
@@ -166,7 +166,7 @@ func GetHeaderOrder(impersonateOption ImpersonateOption) []string {
 	}
 }
 
-func GetSafariUserAgent(os ImpersonateOS) string {
+func GetLatestSafariUserAgent(os ImpersonateOS) string {
 	switch os {
 	case MacOS:
 		return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0.1 Safari/605.1.15"
@@ -179,7 +179,7 @@ func GetSafariUserAgent(os ImpersonateOS) string {
 }
 func GetFirefoxUserAgent(os ImpersonateOS, version int) string {
 	if version == 0 {
-		version = 145
+		version = 148
 	}
 	switch os {
 	case Windows:

@@ -19,6 +19,7 @@ func BrowserTypeToSecChUaName(browserType BrowserType) string {
 		return "Google Chrome"
 	}
 }
+
 func GetSecChUaHeader(browserInfo ImpersonateBrowser) string {
 	switch browserInfo.Type {
 	case BrowserOpera:
