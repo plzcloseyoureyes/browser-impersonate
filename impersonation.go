@@ -66,6 +66,7 @@ type ImpersonateOption struct {
 	SkipHeaderOrder   bool
 }
 
+// 
 func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, isSecureContext bool) {
 	hSet := func(key string, value string) {
 		dontSetThisHeader := false
