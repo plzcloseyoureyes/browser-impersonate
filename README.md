@@ -55,7 +55,8 @@ func main() {
 ## IMPORTANT:
 build tag of "no_azuretls" will compile without the azuretls support removing it from the final binary file size.
 can also be used to eliminate the tls-client usage by building with "no_tlsclient".
--- Example:
+
+- Example:
 ```bash
 go build -tags "no_tlsclient,test" -o final.bin ./
 ```
