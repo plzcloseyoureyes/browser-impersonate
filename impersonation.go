@@ -166,7 +166,7 @@ func GetHeaderOrder(impersonateOption ImpersonateOption) []string {
 		if impersonateOption.OS == IOS {
 			//return []string{}
 		}
-		return []string{"cache-control", "sec-ch-ua", "sec-ch-ua-mobile", "sec-ch-ua-platform", "sec-gpc", "upgrade-insecure-requests", "user-agent", "accept", "sec-gpc", "accept-language", "sec-fetch-site", "sec-fetch-mode", "sec-fetch-user", "sec-fetch-dest", "accept-encoding"}
+		return []string{"cache-control", "sec-ch-ua", "sec-ch-ua-mobile", "sec-ch-ua-platform", "upgrade-insecure-requests", "user-agent", "accept", "sec-gpc", "accept-language", "sec-fetch-site", "sec-fetch-mode", "sec-fetch-user", "sec-fetch-dest", "accept-encoding"}
 	}
 }
 
