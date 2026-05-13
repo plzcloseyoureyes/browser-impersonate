@@ -24,9 +24,10 @@ import (
 
 func main() {
 	imp := browser_impersonate.ImpersonateOption{
-		OS: pickedOS,
-		Browser: ImpersonateBrowser{
-			Type: browserTypePicked,
+		OS: browser_impersonate.Windows,
+		Browser: browser_impersonate.ImpersonateBrowser{
+			Type:    browser_impersonate.BrowserChrome,
+			Version: 148,
 		},
 	}
 	jar := tls_client.NewCookieJar()
@@ -34,7 +35,7 @@ func main() {
 		tls_client.WithTimeoutSeconds(30),
 		tls_client.WithCookieJar(jar), // create cookieJar instance and pass it as argument
 	}
-	tclient, err := browser_impersonate.NewImpersonateTLShttpClient(randomImpersonation, tls_client.NewNoopLogger(), options...)
+	tclient, err := browser_impersonate.NewImpersonateTLShttpClient(imp, tls_client.NewNoopLogger(), options...)
 
 	req, err := http.NewRequest(http.MethodGet, "https://tls.peet.ws/api/all", nil)
 	if err != nil {
@@ -59,6 +60,7 @@ func main() {
 
 	log.Println(string(readBytes))
 }
+
 ```
 
 ## IMPORTANT:
