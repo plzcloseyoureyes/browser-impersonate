@@ -2,6 +2,11 @@
 [![GoDoc](https://godoc.org/github.com/plzcloseyoureyes/browser-impersonate?status.svg)](https://godoc.org/github.com/plzcloseyoureyes/browser-impersonate)
 [![codecov](https://codecov.io/gh/plzcloseyoureyes/browser-impersonate/graph/badge.svg?token=XGHX707RK6)](https://codecov.io/gh/plzcloseyoureyes/browser-impersonate) 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/plzcloseyoureyes/browser-impersonate/blob/master/LICENSE)
+## Browser Impersonate
+
+Browser Impersonate is a lightweight toolkit for crafting HTTP/TLS requests that closely mimic real browser fingerprints, helping developers bypass naive bot detection and reproduce authentic browser network behavior.
+
+Inspired by projects like [curl-impersonate](https://github.com/lwthiker/curl-impersonate), it focuses on realistic TLS handshakes, HTTP/2 behavior, and browser-specific request profiles for scraping, automation, and security research.
 
 # Example
 ```go
