@@ -23,7 +23,12 @@ import (
 )
 
 func main() {
-	randomImpersonation := browser_impersonate.GetRandomRealisticImpersonateOption()
+	imp := browser_impersonate.ImpersonateOption{
+		OS: pickedOS,
+		Browser: ImpersonateBrowser{
+			Type: browserTypePicked,
+		},
+	}
 	jar := tls_client.NewCookieJar()
 	options := []tls_client.HttpClientOption{
 		tls_client.WithTimeoutSeconds(30),
