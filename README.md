@@ -51,3 +51,11 @@ func main() {
 	log.Println(string(readBytes))
 }
 ```
+
+## IMPORTANT:
+build tag of "no_azuretls" will compile without the azuretls support removing it from the final binary file size.
+can also be used to eliminate the tls-client usage by building with "no_tlsclient".
+-- Example:
+```bash
+go build -tags "no_tlsclient,test" -o final.bin ./
+```
