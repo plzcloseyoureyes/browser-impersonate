@@ -9,6 +9,9 @@ import (
 type ImpersonateOS int
 type BrowserType string
 
+const LatestFirefoxMajor = 150
+const LatestChromeMajor = 148
+
 const (
 	BrowserFirefox BrowserType = "firefox"
 	BrowserEdge    BrowserType = "edge"
@@ -66,13 +69,13 @@ type ImpersonateOption struct {
 	SkipHeaderOrder   bool
 }
 
-// 
 func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, isSecureContext bool) {
 	hSet := func(key string, value string) {
 		dontSetThisHeader := false
 		for k := range impersonateOption.OverwriteHeaders {
 			if strings.EqualFold(k, key) {
 				dontSetThisHeader = true
+				return
 			}
 		}
 		if !dontSetThisHeader {
@@ -113,7 +116,7 @@ func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, is
 		}
 
 		if impersonateOption.Browser.Version == 0 {
-			impersonateOption.Browser.Version = 147
+			impersonateOption.Browser.Version = LatestChromeMajor
 		}
 
 		if impersonateOption.OS == IOS {
@@ -172,15 +175,15 @@ func GetLatestSafariUserAgent(os ImpersonateOS) string {
 	case MacOS:
 		return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0.1 Safari/605.1.15"
 	case IOS:
-		// Firefox on iOS uses WebKit engine, not Gecko
 		return "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.1 Mobile/15E148 Safari/604.1"
 	default:
 		return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0.1 Safari/605.1.15"
 	}
 }
+
 func GetFirefoxUserAgent(os ImpersonateOS, version int) string {
 	if version == 0 {
-		version = 148
+		version = LatestFirefoxMajor
 	}
 	switch os {
 	case Windows:
@@ -225,10 +228,16 @@ func GetRandomRealisticImpersonateOption() ImpersonateOption {
 		browserTypeOptions = []BrowserType{BrowserChrome}
 	}
 	browserTypePicked := browserTypeOptions[rand.Intn(len(browserTypeOptions))]
-	return ImpersonateOption{
+	impOpt := ImpersonateOption{
 		OS: pickedOS,
 		Browser: ImpersonateBrowser{
 			Type: browserTypePicked,
 		},
 	}
+	switch browserTypePicked {
+	case BrowserChrome, BrowserEdge, BrowserOpera:
+		minBrowserVer := LatestChromeMajor - 5
+		impOpt.Browser.Version = rand.Intn(LatestChromeMajor-minBrowserVer) + minBrowserVer
+	}
+	return impOpt
 }
