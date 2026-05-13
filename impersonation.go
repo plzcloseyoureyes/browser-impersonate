@@ -214,6 +214,7 @@ func GetRandomImpersonateOS() ImpersonateOS {
 	return AvailableImpersonateOS[rand.Int()%len(AvailableImpersonateOS)]
 }
 
+// Creates random profile
 func GetRandomRealisticImpersonateOption() ImpersonateOption {
 	pickedOS := GetRandomImpersonateOS()
 	var browserTypeOptions []BrowserType
