@@ -159,7 +159,7 @@ func ImpersonateHeaders(h AnyHttpHeader, impersonateOption ImpersonateOption, is
 func GetHeaderOrder(impersonateOption ImpersonateOption) []string {
 	switch impersonateOption.Browser.Type {
 	case BrowserFirefox:
-		return []string{"User-Agent", "accept", "accept-language", "accept-encoding", "upgrade-insecure-requests", "sec-fecth-dest", "sec-fetch-mode", "sec-fetch-site", "sec-fetch-user", "priority"}
+		return []string{"user-agent", "accept", "accept-language", "accept-encoding", "upgrade-insecure-requests", "sec-fecth-dest", "sec-fetch-mode", "sec-fetch-site", "sec-fetch-user", "priority"}
 	case BrowserBrave, BrowserChrome, BrowserEdge:
 		fallthrough
 	default:
