@@ -181,6 +181,7 @@ func GetLatestSafariUserAgent(os ImpersonateOS) string {
 	}
 }
 
+// Firefox user agent generator.
 func GetFirefoxUserAgent(os ImpersonateOS, version int) string {
 	if version == 0 {
 		version = LatestFirefoxMajor
