@@ -163,9 +163,9 @@ func GetHeaderOrder(impersonateOption ImpersonateOption) []string {
 	case BrowserBrave, BrowserChrome, BrowserEdge:
 		fallthrough
 	default:
-		if impersonateOption.OS == IOS {
-			//return []string{}
-		}
+		//if impersonateOption.OS == IOS {
+		//return []string{}
+		//}
 		return []string{"cache-control", "sec-ch-ua", "sec-ch-ua-mobile", "sec-ch-ua-platform", "upgrade-insecure-requests", "user-agent", "accept", "sec-gpc", "accept-language", "sec-fetch-site", "sec-fetch-mode", "sec-fetch-user", "sec-fetch-dest", "accept-encoding"}
 	}
 }
